@@ -35,11 +35,6 @@ def choose_job(jobs: list[dict]) -> dict | None:
     if not matching:
         return None
 
-    for status in ("SUCCEEDED", "RUNNING", "PENDING", "FAILED"):
-        candidates = [job for job in matching if job.get("status_code") == status]
-        if candidates:
-            return sorted(candidates, key=lambda job: job.get("request_time", ""), reverse=True)[0]
-
     return sorted(matching, key=lambda job: job.get("request_time", ""), reverse=True)[0]
 
 

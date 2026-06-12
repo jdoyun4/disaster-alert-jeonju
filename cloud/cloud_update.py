@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import csv
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -88,17 +90,47 @@ def publish() -> None:
         "integrated_ground_flood_risk.csv",
         "historical_flood_validation.csv",
         "insar_displacement_summary.csv",
+        "jeonju_hyp3_job_status.json",
     ]
     for name in names:
         source = OUTPUT_DIR / name
         if source.exists():
             shutil.copy2(source, DOCS_DIR / name)
 
+    risk_points = []
+    risk_path = OUTPUT_DIR / "integrated_ground_flood_risk.csv"
+    if risk_path.exists():
+        with risk_path.open("r", encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                risk_points.append(
+                    {
+                        "risk_type": row.get("risk_type", ""),
+                        "level": row.get("integrated_level", ""),
+                        "score": float(row.get("integrated_score", 0) or 0),
+                        "latitude": float(row.get("latitude", 0) or 0),
+                        "longitude": float(row.get("longitude", 0) or 0),
+                        "summary": row.get("summary", ""),
+                    }
+                )
+    (DOCS_DIR / "risk_points.json").write_text(
+        json.dumps(
+            {
+                "updated_at_utc": datetime.now(timezone.utc).isoformat(),
+                "count": len(risk_points),
+                "points": risk_points,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
     (DOCS_DIR / "sync_status.json").write_text(
         json.dumps(
             {
                 "status": "ok",
                 "source": "GitHub Actions",
+                "updated_at_utc": datetime.now(timezone.utc).isoformat(),
             },
             ensure_ascii=False,
             indent=2,
