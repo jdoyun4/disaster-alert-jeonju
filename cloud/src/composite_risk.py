@@ -5,6 +5,7 @@ import pandas as pd
 import rasterio
 from rasterio.warp import transform as transform_coords
 
+from spatial_filter import filter_jeonju
 
 OUTPUT_DIR = Path("outputs")
 INSAR_DIR = Path("data/insar")
@@ -167,7 +168,18 @@ def build_insar_grid_points() -> pd.DataFrame:
         sample_rows = sample_rows[valid]
         sample_cols = sample_cols[valid]
         values = values[valid]
-        xs, ys = rasterio.transform.xy(src.transform, sample_rows, sample_cols)
+        pixel_cols = sample_cols.astype(float) + 0.5
+        pixel_rows = sample_rows.astype(float) + 0.5
+        xs = (
+            src.transform.c
+            + pixel_cols * src.transform.a
+            + pixel_rows * src.transform.b
+        )
+        ys = (
+            src.transform.f
+            + pixel_cols * src.transform.d
+            + pixel_rows * src.transform.e
+        )
         lon_values, lat_values = transform_coords(src.crs, "EPSG:4326", xs, ys)
 
         grid = pd.DataFrame(
@@ -183,6 +195,7 @@ def build_insar_grid_points() -> pd.DataFrame:
             & (grid["latitude"] >= min_lat)
             & (grid["latitude"] <= max_lat)
         ].copy()
+        grid = filter_jeonju(grid)
         if grid.empty:
             return pd.DataFrame()
 
@@ -264,8 +277,8 @@ def build_reason(row: pd.Series) -> str:
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    optical = read_csv(OUTPUT_DIR / "detected_anomalies.csv")
-    insar = read_csv(OUTPUT_DIR / "insar_hotspots.csv")
+    optical = filter_jeonju(read_csv(OUTPUT_DIR / "detected_anomalies.csv"))
+    insar = filter_jeonju(read_csv(OUTPUT_DIR / "insar_hotspots.csv"))
 
     outputs = []
 

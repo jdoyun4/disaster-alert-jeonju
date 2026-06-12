@@ -91,6 +91,7 @@ def publish() -> None:
         "historical_flood_validation.csv",
         "insar_displacement_summary.csv",
         "jeonju_hyp3_job_status.json",
+        "data_quality.json",
     ]
     for name in names:
         source = OUTPUT_DIR / name
@@ -155,6 +156,7 @@ def main() -> None:
 
     python("src/rainfall_alert.py")
     python("src/historical_flood_validation.py")
+    python("src/data_quality.py")
     python("src/visualize.py")
     python("src/unified_app.py")
     publish()

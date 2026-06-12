@@ -80,6 +80,10 @@ def popup_html(row: pd.Series) -> str:
     if risk_type == "저지대 침수":
         rows += metric_row("고도", f"{safe_float(row.get('elevation_m', 0)):.1f} m")
         rows += metric_row("주변보다 낮은 정도", f"{safe_float(row.get('relative_depression_m', 0)):.1f} m")
+        rows += metric_row(
+            "지형 근거 충족",
+            f"{int(safe_float(row.get('terrain_evidence_count', 0)))} / 3",
+        )
     else:
         rows += metric_row("InSAR 변위 절댓값", f"{safe_float(row.get('insar_displacement_abs', 0)):.6f}")
         rows += metric_row("광학 영상 기여", f"{safe_float(row.get('optical_component', 0)):.1f}")

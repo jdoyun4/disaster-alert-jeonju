@@ -7,6 +7,7 @@ import pandas as pd
 import rasterio
 from rasterio.warp import transform
 
+from spatial_filter import contains_jeonju
 
 INSAR_DIR = Path("data/insar")
 OUTPUT_DIR = Path("outputs")
@@ -128,7 +129,10 @@ def main() -> None:
         lon_values, lat_values = transform(crs, "EPSG:4326", [x_coord], [y_coord])
         lon = lon_values[0]
         lat = lat_values[0]
-        if not (min_lon <= lon <= max_lon and min_lat <= lat <= max_lat):
+        if (
+            not (min_lon <= lon <= max_lon and min_lat <= lat <= max_lat)
+            or not contains_jeonju(lon, lat)
+        ):
             continue
         level, direction = classify_displacement(value, threshold)
 
