@@ -1,0 +1,18 @@
+{
+  "id": "S2B_52SCE_20260610_0_L2A",
+  "collection": "sentinel-2-l2a",
+  "datetime": "2026-06-10T02:27:39.010000Z",
+  "cloud_cover": 34.724301,
+  "asset": "red",
+  "asset_href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/52/S/CE/2026/6/S2B_52SCE_20260610_0_L2A/B04.tif",
+  "nir_asset": "nir",
+  "nir_asset_href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/52/S/CE/2026/6/S2B_52SCE_20260610_0_L2A/B08.tif",
+  "bbox_wgs84": [
+    126.95,
+    35.72,
+    127.25,
+    35.95
+  ],
+  "search_date_range": "2026-04-28T11:16:20Z/2026-06-12T11:16:20Z",
+  "downloaded_at_utc": "2026-06-12T11:16:30.199115+00:00"
+}
