@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>전주 지반·침수 통합 위험 앱</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Malgun Gothic', Arial, sans-serif; background: #f8fafc; color: #111827; }
+    header { padding: 16px 20px; background: #111827; color: white; display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+    header h1 { margin: 0; font-size: 20px; }
+    header .meta { font-size: 12px; color: #d1d5db; }
+    nav { display: flex; gap: 8px; padding: 10px 14px; background: white; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 5; }
+    nav button { border: 1px solid #d1d5db; background: white; border-radius: 6px; padding: 8px 10px; cursor: pointer; font-weight: 700; white-space: nowrap; }
+    nav button.active { background: #111827; color: white; border-color: #111827; }
+    main { padding: 14px; }
+    .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+    .card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; }
+    .card span { display: block; font-size: 12px; color: #6b7280; }
+    .card b { font-size: 26px; }
+    section { display: none; }
+    section.active { display: block; }
+    iframe { width: 100%; height: calc(100vh - 190px); border: 1px solid #d1d5db; border-radius: 8px; background: white; }
+    .panel { background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 14px; margin-bottom: 12px; }
+    .actions button { border: 0; border-radius: 6px; padding: 11px 13px; background: #111827; color: white; font-weight: 700; cursor: pointer; margin-right: 8px; margin-bottom: 8px; }
+    .actions button.secondary { background: #2563eb; }
+    .status { font-size: 20px; font-weight: 800; margin-top: 8px; }
+    .safe { color: #166534; }
+    .warn { color: #c2410c; }
+    .danger { color: #991b1b; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: white; }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 8px; text-align: left; vertical-align: top; }
+    th { background: #f3f4f6; }
+    .small { color: #6b7280; font-size: 12px; line-height: 1.5; }
+    @media (max-width: 800px) {
+      header { display: block; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      iframe { height: calc(100vh - 240px); }
+      nav { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>전주 지반·침수 통합 위험 앱</h1>
+  <div class="meta">위성 갱신 상태: no_new_data · 최근 장면: S2B_52SCE_20260610_0_L2A</div>
+</header>
+<nav>
+  <button class="active" onclick="showTab('map', this)">통합 위험 지도</button>
+  <button onclick="showTab('rain', this)">강우 경고</button>
+  <button onclick="showTab('location', this)">내 위치 알림</button>
+  <button onclick="showTab('history', this)">과거 침수 검증</button>
+  <button onclick="showTab('data', this)">데이터 요약</button>
+</nav>
+<main>
+  <div class="cards">
+      <div class="card"><span>지반 약화 후보</span><b>9</b></div>
+      <div class="card"><span>저지대 침수 후보</span><b>25</b></div>
+      <div class="card"><span>강우 경고 후보</span><b>0</b></div>
+      <div class="card"><span>과거 이력 일치</span><b>2</b></div>
+    </div>
+
+  <section id="map" class="active">
+    <iframe src="map.html"></iframe>
+  </section>
+
+  <section id="rain">
+    <div class="panel">
+      <b>강수량 기반 침수 경고</b>
+      <div class="small">최신 예보를 위험 지점별 기준과 비교합니다. 저지대일수록 더 낮은 강수량에서도 주의로 표시될 수 있습니다.</div>
+    </div>
+    <table>
+      <thead><tr><th>상태</th><th>침수점수</th><th>예보 3시간</th><th>지역 3시간 기준</th><th>예보 12시간</th><th>지역 12시간 기준</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>정상</td>
+              <td>78.9</td>
+              <td>3.3 mm</td>
+              <td>37.1 mm</td>
+              <td>4.1 mm</td>
+              <td>68.1 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.6</td>
+              <td>3.3 mm</td>
+              <td>38.7 mm</td>
+              <td>4.1 mm</td>
+              <td>70.9 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.5</td>
+              <td>3.3 mm</td>
+              <td>38.4 mm</td>
+              <td>4.1 mm</td>
+              <td>70.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.5</td>
+              <td>3.3 mm</td>
+              <td>36.2 mm</td>
+              <td>4.1 mm</td>
+              <td>66.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.3</td>
+              <td>3.3 mm</td>
+              <td>38.5 mm</td>
+              <td>4.1 mm</td>
+              <td>70.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.2</td>
+              <td>3.3 mm</td>
+              <td>40.0 mm</td>
+              <td>4.1 mm</td>
+              <td>73.3 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.2</td>
+              <td>3.3 mm</td>
+              <td>40.1 mm</td>
+              <td>4.1 mm</td>
+              <td>73.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.2</td>
+              <td>3.3 mm</td>
+              <td>38.4 mm</td>
+              <td>4.1 mm</td>
+              <td>70.3 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.1</td>
+              <td>3.3 mm</td>
+              <td>39.5 mm</td>
+              <td>4.1 mm</td>
+              <td>72.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.1</td>
+              <td>3.3 mm</td>
+              <td>39.0 mm</td>
+              <td>4.1 mm</td>
+              <td>71.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.1</td>
+              <td>3.3 mm</td>
+              <td>39.5 mm</td>
+              <td>4.1 mm</td>
+              <td>72.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.0</td>
+              <td>3.3 mm</td>
+              <td>39.4 mm</td>
+              <td>4.1 mm</td>
+              <td>72.2 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>78.0</td>
+              <td>3.3 mm</td>
+              <td>42.5 mm</td>
+              <td>4.1 mm</td>
+              <td>77.9 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.9</td>
+              <td>3.3 mm</td>
+              <td>40.5 mm</td>
+              <td>4.1 mm</td>
+              <td>74.2 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.9</td>
+              <td>3.3 mm</td>
+              <td>40.8 mm</td>
+              <td>4.1 mm</td>
+              <td>74.9 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.9</td>
+              <td>3.3 mm</td>
+              <td>42.2 mm</td>
+              <td>4.1 mm</td>
+              <td>77.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.9</td>
+              <td>3.3 mm</td>
+              <td>42.5 mm</td>
+              <td>4.1 mm</td>
+              <td>78.0 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.8</td>
+              <td>3.3 mm</td>
+              <td>42.8 mm</td>
+              <td>4.1 mm</td>
+              <td>78.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.8</td>
+              <td>3.3 mm</td>
+              <td>42.9 mm</td>
+              <td>4.1 mm</td>
+              <td>78.7 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.7</td>
+              <td>3.3 mm</td>
+              <td>43.9 mm</td>
+              <td>4.1 mm</td>
+              <td>80.6 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.7</td>
+              <td>3.3 mm</td>
+              <td>42.5 mm</td>
+              <td>4.1 mm</td>
+              <td>77.9 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.7</td>
+              <td>3.3 mm</td>
+              <td>41.9 mm</td>
+              <td>4.1 mm</td>
+              <td>76.7 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.7</td>
+              <td>3.3 mm</td>
+              <td>43.4 mm</td>
+              <td>4.1 mm</td>
+              <td>79.5 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.7</td>
+              <td>3.3 mm</td>
+              <td>41.0 mm</td>
+              <td>4.1 mm</td>
+              <td>75.1 mm</td>
+            </tr>
+            
+
+            <tr>
+              <td>정상</td>
+              <td>77.7</td>
+              <td>3.3 mm</td>
+              <td>40.1 mm</td>
+              <td>4.1 mm</td>
+              <td>73.5 mm</td>
+            </tr>
+            </tbody>
+    </table>
+  </section>
+
+  <section id="location">
+    <div class="panel">
+      <b>내 위치 기반 위험 알림</b>
+      <div class="small">900m 이내는 경고, 1500m 이내는 주의로 판단합니다. 브라우저 위치 권한을 허용해야 합니다.</div>
+      <div class="actions">
+        <button onclick="checkLocation()">내 위치로 위험 확인</button>
+        <button class="secondary" onclick="startWatch()">위치 계속 감시</button>
+        <button class="secondary" onclick="stopWatch()">감시 중지</button>
+      </div>
+      <div id="status" class="status">대기 중</div>
+      <div id="locationText" class="small"></div>
+    </div>
+    <div class="panel">
+      <b>가까운 위험 후보</b>
+      <div id="nearest"></div>
+    </div>
+  </section>
+
+  <section id="history">
+    <div class="panel">
+      <b>과거 침수 이력 검증</b>
+      <div class="small">기사와 공개자료에서 확인된 침수·통제 지점을 추정 좌표로 만든 뒤, 우리가 만든 위험좌표와 얼마나 가까운지 비교한 표입니다.</div>
+    </div>
+    <table>
+      <thead><tr><th>과거 지점</th><th>시기</th><th>피해 유형</th><th>가장 가까운 우리 후보</th><th>거리</th><th>후보 점수</th><th>판정</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>월평 자연재해위험개선지구 전미동 일대</td>
+              <td>상습 침수 취약지구</td>
+              <td>호우 시 침수 우려</td>
+              <td>저지대 침수</td>
+              <td>5 m</td>
+              <td>78.0</td>
+              <td>매우 잘 겹침</td>
+            </tr>
+            
+
+            <tr>
+              <td>월평 자연재해위험개선지구 송천동 일대</td>
+              <td>상습 침수 취약지구</td>
+              <td>호우 시 침수 우려</td>
+              <td>저지대 침수</td>
+              <td>3 m</td>
+              <td>77.7</td>
+              <td>매우 잘 겹침</td>
+            </tr>
+            
+
+            <tr>
+              <td>마전교 언더패스 일대</td>
+              <td>2023년 5월 호우</td>
+              <td>차량 침수·통제 보도 지점</td>
+              <td>저지대 침수 후보</td>
+              <td>700 m</td>
+              <td>72.6</td>
+              <td>근처 후보 있음</td>
+            </tr>
+            
+
+            <tr>
+              <td>진북터널 입구 일대</td>
+              <td>2023년 5월 호우</td>
+              <td>도로 장애·통제 보도 지점</td>
+              <td>저지대 침수 후보</td>
+              <td>1824 m</td>
+              <td>72.9</td>
+              <td>간접 참고</td>
+            </tr>
+            
+
+            <tr>
+              <td>삼천 둔치·하상도로 일대</td>
+              <td>2023년 7월 호우</td>
+              <td>하천 수위 상승·도로 통제 지점</td>
+              <td>저지대 침수 후보</td>
+              <td>918 m</td>
+              <td>72.6</td>
+              <td>근처 후보 있음</td>
+            </tr>
+            </tbody>
+    </table>
+  </section>
+
+  <section id="data">
+    <div class="panel">
+      <b>통합 위험 후보 데이터</b>
+      <div class="small">붉은 계열은 지반 약화, 푸른 계열은 저지대 침수 우려입니다. 지도에서는 보라색으로 과거 침수 이력을 따로 표시합니다.</div>
+    </div>
+    <table>
+      <thead><tr><th>구분</th><th>등급</th><th>점수</th><th>좌표</th><th>요약</th></tr></thead>
+      <tbody>
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.9</td>
+              <td>35.856640, 126.959553</td>
+              <td>해당 지점 고도 10.0m, 주변 평균 대비 8.1m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.6</td>
+              <td>35.903373, 127.122974</td>
+              <td>해당 지점 고도 8.0m, 주변 평균 대비 6.3m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.5</td>
+              <td>35.763090, 126.959553</td>
+              <td>해당 지점 고도 5.0m, 주변 평균 대비 6.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.5</td>
+              <td>35.872221, 126.978779</td>
+              <td>해당 지점 고도 8.0m, 주변 평균 대비 9.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.3</td>
+              <td>35.848848, 127.007618</td>
+              <td>해당 지점 고도 8.0m, 주변 평균 대비 6.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.2</td>
+              <td>35.942297, 127.036457</td>
+              <td>해당 지점 고도 10.0m, 주변 평균 대비 4.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.2</td>
+              <td>35.934514, 126.959553</td>
+              <td>해당 지점 고도 10.0m, 주변 평균 대비 4.7m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.2</td>
+              <td>35.825469, 126.969166</td>
+              <td>해당 지점 고도 11.0m, 주변 평균 대비 6.8m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.1</td>
+              <td>35.841056, 126.959553</td>
+              <td>해당 지점 고도 7.0m, 주변 평균 대비 5.4m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.1</td>
+              <td>35.872221, 127.065296</td>
+              <td>해당 지점 고도 10.0m, 주변 평균 대비 6.0m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.1</td>
+              <td>35.809879, 126.959553</td>
+              <td>해당 지점 고도 8.0m, 주변 평균 대비 5.4m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.0</td>
+              <td>35.825469, 126.959553</td>
+              <td>해당 지점 고도 10.0m, 주변 평균 대비 5.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>78.0</td>
+              <td>35.918945, 126.988392</td>
+              <td>해당 지점 고도 4.0m, 주변 평균 대비 1.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.9</td>
+              <td>35.880010, 127.046070</td>
+              <td>해당 지점 고도 7.0m, 주변 평균 대비 4.3m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.9</td>
+              <td>35.809879, 126.969166</td>
+              <td>해당 지점 고도 12.0m, 주변 평균 대비 3.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.9</td>
+              <td>35.895586, 126.969166</td>
+              <td>해당 지점 고도 7.0m, 주변 평균 대비 2.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.9</td>
+              <td>35.926730, 126.978779</td>
+              <td>해당 지점 고도 6.0m, 주변 평균 대비 1.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.8</td>
+              <td>35.895586, 126.978779</td>
+              <td>해당 지점 고도 5.0m, 주변 평균 대비 1.5m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.8</td>
+              <td>35.887798, 127.007618</td>
+              <td>해당 지점 고도 6.0m, 주변 평균 대비 1.5m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.7</td>
+              <td>35.911159, 127.026844</td>
+              <td>해당 지점 고도 8.0m, 주변 평균 대비 0.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.7</td>
+              <td>35.887798, 127.065296</td>
+              <td>해당 지점 고도 8.0m, 주변 평균 대비 2.0m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.7</td>
+              <td>35.895586, 127.046070</td>
+              <td>해당 지점 고도 5.0m, 주변 평균 대비 2.7m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.7</td>
+              <td>35.918945, 126.998005</td>
+              <td>해당 지점 고도 5.0m, 주변 평균 대비 0.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.7</td>
+              <td>35.895586, 126.988392</td>
+              <td>해당 지점 고도 3.0m, 주변 평균 대비 3.8m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>저지대 침수</td>
+              <td>매우 높음</td>
+              <td>77.7</td>
+              <td>35.856640, 127.017231</td>
+              <td>해당 지점 고도 7.0m, 주변 평균 대비 4.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>높음</td>
+              <td>70.0</td>
+              <td>35.750944, 127.140137</td>
+              <td>광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>높음</td>
+              <td>66.6</td>
+              <td>35.947557, 126.976066</td>
+              <td>광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>높음</td>
+              <td>65.6</td>
+              <td>35.782126, 127.059756</td>
+              <td>광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>높음</td>
+              <td>63.6</td>
+              <td>35.930377, 126.983597</td>
+              <td>광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>주의</td>
+              <td>58.5</td>
+              <td>35.947438, 126.968974</td>
+              <td>광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>주의</td>
+              <td>57.3</td>
+              <td>35.782762, 127.099568</td>
+              <td>광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다.</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>주의</td>
+              <td>57.3</td>
+              <td>35.912597, 126.955681</td>
+              <td>광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>주의</td>
+              <td>56.6</td>
+              <td>35.947677, 126.983157</td>
+              <td>광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</td>
+            </tr>
+            
+
+            <tr>
+              <td>지반 약화</td>
+              <td>주의</td>
+              <td>55.4</td>
+              <td>35.906951, 126.962918</td>
+              <td>광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</td>
+            </tr>
+            </tbody>
+    </table>
+  </section>
+</main>
+
+<script>
+const riskPoints = [{"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.88593451388931, "lat": 35.85663965115517, "lon": 126.9595527648926, "summary": "해당 지점 고도 10.0m, 주변 평균 대비 8.1m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.6331388801434, "lat": 35.903373209688425, "lon": 127.12297439575195, "summary": "해당 지점 고도 8.0m, 주변 평균 대비 6.3m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.5165179806969, "lat": 35.76308985263032, "lon": 126.9595527648926, "summary": "해당 지점 고도 5.0m, 주변 평균 대비 6.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.51441699709478, "lat": 35.8722205675616, "lon": 126.97877883911131, "summary": "해당 지점 고도 8.0m, 주변 평균 대비 9.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.33772225862816, "lat": 35.848848044356686, "lon": 127.00761795043948, "summary": "해당 지점 고도 8.0m, 주변 평균 대비 6.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.22122268399355, "lat": 35.94229677415812, "lon": 127.03645706176756, "summary": "해당 지점 고도 10.0m, 주변 평균 대비 4.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.19676001532444, "lat": 35.93451359391221, "lon": 126.9595527648926, "summary": "해당 지점 고도 10.0m, 주변 평균 대비 4.7m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.19475903076079, "lat": 35.825468630406455, "lon": 126.96916580200195, "summary": "해당 지점 고도 11.0m, 주변 평균 대비 6.8m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.14646385420507, "lat": 35.84105567191978, "lon": 126.9595527648926, "summary": "해당 지점 고도 7.0m, 주변 평균 대비 5.4m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.10057617977031, "lat": 35.8722205675616, "lon": 127.06529617309567, "summary": "해당 지점 고도 10.0m, 주변 평균 대비 6.0m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.0887030209903, "lat": 35.80987852716727, "lon": 126.9595527648926, "summary": "해당 지점 고도 8.0m, 주변 평균 대비 5.4m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 78.01650727914792, "lat": 35.825468630406455, "lon": 126.9595527648926, "summary": "해당 지점 고도 10.0m, 주변 평균 대비 5.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.97241656283296, "lat": 35.918944934311824, "lon": 126.98839187622067, "summary": "해당 지점 고도 4.0m, 주변 평균 대비 1.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.9210459736659, "lat": 35.88000987703203, "lon": 127.04607009887695, "summary": "해당 지점 고도 7.0m, 주변 평균 대비 4.3m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.9018167152126, "lat": 35.80987852716727, "lon": 126.96916580200195, "summary": "해당 지점 고도 12.0m, 주변 평균 대비 3.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.85650003696188, "lat": 35.895586198164004, "lon": 126.96916580200195, "summary": "해당 지점 고도 7.0m, 주변 평균 대비 2.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.85026208727656, "lat": 35.92672964727403, "lon": 126.97877883911131, "summary": "해당 지점 고도 6.0m, 주변 평균 대비 1.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.83377380014545, "lat": 35.895586198164004, "lon": 126.97877883911131, "summary": "해당 지점 고도 5.0m, 주변 평균 대비 1.5m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.7606805559253, "lat": 35.88779842058902, "lon": 127.00761795043948, "summary": "해당 지점 고도 6.0m, 주변 평균 대비 1.5m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.74823341484506, "lat": 35.91115945509384, "lon": 127.0268440246582, "summary": "해당 지점 고도 8.0m, 주변 평균 대비 0.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.74722973446579, "lat": 35.88779842058902, "lon": 127.06529617309567, "summary": "해당 지점 고도 8.0m, 주변 평균 대비 2.0m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.71691720489432, "lat": 35.895586198164004, "lon": 127.04607009887695, "summary": "해당 지점 고도 5.0m, 주변 평균 대비 2.7m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.71068543417204, "lat": 35.918944934311824, "lon": 126.99800491333008, "summary": "해당 지점 고도 5.0m, 주변 평균 대비 0.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.69689100634415, "lat": 35.895586198164004, "lon": 126.98839187622067, "summary": "해당 지점 고도 3.0m, 주변 평균 대비 3.8m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "저지대 침수", "level": "매우 높음", "score": 77.67532981073268, "lat": 35.85663965115517, "lon": 127.01723098754884, "summary": "해당 지점 고도 7.0m, 주변 평균 대비 4.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다."}, {"risk_type": "지반 약화", "level": "높음", "score": 70.0, "lat": 35.750943705981896, "lon": 127.1401365288936, "summary": "광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다."}, {"risk_type": "지반 약화", "level": "높음", "score": 66.64793763350845, "lat": 35.94755740028494, "lon": 126.97606551845593, "summary": "광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼"}, {"risk_type": "지반 약화", "level": "높음", "score": 65.57610431560661, "lat": 35.78212641964949, "lon": 127.05975603707871, "summary": "광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다."}, {"risk_type": "지반 약화", "level": "높음", "score": 63.55885496695954, "lat": 35.93037678690171, "lon": 126.98359709307675, "summary": "광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼"}, {"risk_type": "지반 약화", "level": "주의", "score": 58.52733352395046, "lat": 35.94743755813346, "lon": 126.9689736328982, "summary": "광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼"}, {"risk_type": "지반 약화", "level": "주의", "score": 57.33896796253752, "lat": 35.7827624002039, "lon": 127.09956783823512, "summary": "광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다."}, {"risk_type": "지반 약화", "level": "주의", "score": 57.28100282231852, "lat": 35.912597095717416, "lon": 126.95568124912528, "summary": "광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼"}, {"risk_type": "지반 약화", "level": "주의", "score": 56.64633087964725, "lat": 35.94767682375561, "lon": 126.98315744581524, "summary": "광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼"}, {"risk_type": "지반 약화", "level": "주의", "score": 55.41032836551, "lat": 35.906950989173524, "lon": 126.96291784760622, "summary": "광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼"}];
+const alertRadiusM = 900;
+const warningRadiusM = 1500;
+let watchId = null;
+let audioCtx = null;
+
+function showTab(id, button) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  button.classList.add('active');
+}
+
+function distanceM(lat1, lon1, lat2, lon2) {
+  const R = 6371000;
+  const toRad = d => d * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat/2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon/2) ** 2;
+  return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function beep() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.frequency.value = 880;
+    gain.gain.value = 0.18;
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    setTimeout(() => osc.stop(), 700);
+  } catch (e) {}
+}
+
+function evaluate(lat, lon) {
+  const sorted = riskPoints.map(p => ({...p, distance: distanceM(lat, lon, p.lat, p.lon)})).sort((a, b) => a.distance - b.distance);
+  const nearest = sorted.slice(0, 8);
+  const closest = nearest[0];
+  const status = document.getElementById('status');
+  document.getElementById('locationText').textContent = `현재 위치: 위도 ${lat.toFixed(6)}, 경도 ${lon.toFixed(6)}`;
+  if (!closest) {
+    status.textContent = '위험 후보 데이터가 없음';
+    status.className = 'status warn';
+    return;
+  }
+  if (closest.distance <= alertRadiusM) {
+    status.textContent = `경고: ${Math.round(closest.distance)}m 근처에 ${closest.risk_type} 후보가 있습니다`;
+    status.className = 'status danger';
+    beep();
+  } else if (closest.distance <= warningRadiusM) {
+    status.textContent = `주의: ${Math.round(closest.distance)}m 근처에 위험 후보가 있습니다`;
+    status.className = 'status warn';
+  } else {
+    status.textContent = `정상: 가장 가까운 위험 후보까지 ${Math.round(closest.distance)}m`;
+    status.className = 'status safe';
+  }
+  document.getElementById('nearest').innerHTML = `<table><thead><tr><th>거리</th><th>구분</th><th>등급</th><th>점수</th><th>요약</th></tr></thead><tbody>${nearest.map(p => `<tr><td>${Math.round(p.distance)}m</td><td>${p.risk_type}</td><td>${p.level}</td><td>${p.score.toFixed(1)}</td><td>${p.summary}</td></tr>`).join('')}</tbody></table>`;
+}
+
+function onError() {
+  const status = document.getElementById('status');
+  status.textContent = '위치 확인 실패: 브라우저 위치 권한을 허용해야 합니다.';
+  status.className = 'status warn';
+}
+
+function checkLocation() {
+  if (!navigator.geolocation) return onError();
+  navigator.geolocation.getCurrentPosition(pos => evaluate(pos.coords.latitude, pos.coords.longitude), onError, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
+}
+
+function startWatch() {
+  if (!navigator.geolocation) return onError();
+  if (watchId !== null) return;
+  watchId = navigator.geolocation.watchPosition(pos => evaluate(pos.coords.latitude, pos.coords.longitude), onError, { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 });
+  document.getElementById('status').textContent = '위치 감시 중';
+}
+
+function stopWatch() {
+  if (watchId !== null) {
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+  }
+  document.getElementById('status').textContent = '감시 중지됨';
+  document.getElementById('status').className = 'status';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+hyp3_token.txt
+data/raw/*
+!data/raw/sentinel2_active_sample_metadata.json
+data/tiles/*
+data/insar_downloads/*
+outputs/*.png
+outputs/anomaly_scores.csv
+outputs/first_band_preview.png
+outputs/hyp3_recent_jobs.json
+outputs/jeonju_hyp3_job_status.json
+outputs/latest_hyp3_submit.json
+__pycache__/
+*.pyc

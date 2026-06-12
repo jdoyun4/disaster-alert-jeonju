@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_39a2701eba405fdc9931247b1a83987f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        z-index: 9999;
+        background: white;
+        padding: 12px 14px;
+        border: 1px solid #999;
+        border-radius: 6px;
+        font-size: 13px;
+        line-height: 1.55;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    ">
+      <b>통합 위험 정보</b><br>
+      <span style="color:#dc2626;">●</span> 지반 약화 후보<br>
+      <span style="color:#0284c7;">●</span> 저지대 침수 후보<br>
+      <span style="color:#9333ea;">●</span> 과거 침수 이력 검증 지점<br>
+      <hr style="margin:6px 0;">
+      보라색 지점은 과거 침수·통제 이력과 현재 위험좌표를 비교한 검증 레이어입니다.
+    </div>
+    
+    
+            <div class="folium-map" id="map_39a2701eba405fdc9931247b1a83987f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_39a2701eba405fdc9931247b1a83987f = L.map(
+                "map_39a2701eba405fdc9931247b1a83987f",
+                {
+                    center: [35.87599269296783, 127.00433139071185],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ed88416207b99b254487329715c3d4f3 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_ed88416207b99b254487329715c3d4f3.addTo(map_39a2701eba405fdc9931247b1a83987f);
+        
+    
+            var feature_group_dbf06823c5ab625702ed6f22031ab775 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_55008c02f110c7c302b17692990a3efd = L.circleMarker(
+                [35.750943705981896, 127.1401365288936],
+                {"bubblingMouseEvents": true, "color": "#dc2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dc2626", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 24.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_43d39a7add29c2d954ccf1363629613e = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_e6bd3976082e7065083f7e1de6a328b5 = $(`<div id="html_e6bd3976082e7065083f7e1de6a328b5" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#dc2626;color:white;">지반 약화 · 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">70.0 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">70.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">70.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.024896</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">25.0</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">광학영상만으로는 산림·그늘·식생 때문에 표면 이상이 약하게 보일 수 있어, 위성 레이더 변위값을 직접 반영했습니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.750944<br>경도 127.140137       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_43d39a7add29c2d954ccf1363629613e.setContent(html_e6bd3976082e7065083f7e1de6a328b5);
+            
+        
+
+        circle_marker_55008c02f110c7c302b17692990a3efd.bindPopup(popup_43d39a7add29c2d954ccf1363629613e)
+        ;
+
+        
+    
+    
+            var circle_marker_b8f711a75e1472dfc63c5fb71b49f4b9 = L.circleMarker(
+                [35.94755740028494, 126.97606551845593],
+                {"bubblingMouseEvents": true, "color": "#dc2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dc2626", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.329587526701687, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_b05f28313b82a49ffe4dfee414dc6cdf = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_60dcaf12edb4351d902e7d309cf7102b = $(`<div id="html_60dcaf12edb4351d902e7d309cf7102b" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#dc2626;color:white;">지반 약화 · 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">66.6 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">66.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">66.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.011963</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">33.4</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">17.3</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">15.9</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">타일 전체가 주변보다 밝게 반사되어 나지, 마른 토양, 콘크리트, 암반 노출 같은 표면 변화 가능성이 있습니다. 오차가 타일 전반에 퍼져 있어 넓은 면적의 표면 차이 가능성이 있습니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.947557<br>경도 126.976066       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_b05f28313b82a49ffe4dfee414dc6cdf.setContent(html_60dcaf12edb4351d902e7d309cf7102b);
+            
+        
+
+        circle_marker_b8f711a75e1472dfc63c5fb71b49f4b9.bindPopup(popup_b05f28313b82a49ffe4dfee414dc6cdf)
+        ;
+
+        
+    
+    
+            var circle_marker_38d3b165768a169ea1093ee37ee88150 = L.circleMarker(
+                [35.78212641964949, 127.05975603707871],
+                {"bubblingMouseEvents": true, "color": "#dc2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dc2626", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.115220863121323, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_6a497c75e06ddb430fa072570439c53a = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_8bd38432e79459e7ab4a310b7da0cc6a = $(`<div id="html_8bd38432e79459e7ab4a310b7da0cc6a" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#dc2626;color:white;">지반 약화 · 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">65.6 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">65.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">65.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.023374</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">22.5</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">광학영상만으로는 산림·그늘·식생 때문에 표면 이상이 약하게 보일 수 있어, 위성 레이더 변위값을 직접 반영했습니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.782126<br>경도 127.059756       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_6a497c75e06ddb430fa072570439c53a.setContent(html_8bd38432e79459e7ab4a310b7da0cc6a);
+            
+        
+
+        circle_marker_38d3b165768a169ea1093ee37ee88150.bindPopup(popup_6a497c75e06ddb430fa072570439c53a)
+        ;
+
+        
+    
+    
+            var circle_marker_34b9382818972117eeab78b5795ac59b = L.circleMarker(
+                [35.93037678690171, 126.98359709307675],
+                {"bubblingMouseEvents": true, "color": "#dc2626", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dc2626", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.71177099339191, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_25f9cd279a3bb8287f2898ec69013b46 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_86948bebe04424a7de10117c496cf42e = $(`<div id="html_86948bebe04424a7de10117c496cf42e" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#dc2626;color:white;">지반 약화 · 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">63.6 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">63.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">63.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.007649</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">35.0</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">18.4</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">10.2</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">타일 전체가 주변보다 밝게 반사되어 나지, 마른 토양, 콘크리트, 암반 노출 같은 표면 변화 가능성이 있습니다. 오차가 타일 중심부에 집중되어 국소적인 표면 변화 가능성이 큽니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.930377<br>경도 126.983597       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_25f9cd279a3bb8287f2898ec69013b46.setContent(html_86948bebe04424a7de10117c496cf42e);
+            
+        
+
+        circle_marker_34b9382818972117eeab78b5795ac59b.bindPopup(popup_25f9cd279a3bb8287f2898ec69013b46)
+        ;
+
+        
+    
+    
+            var circle_marker_36c79cc52cb4d3d03f284aa86b1408bb = L.circleMarker(
+                [35.94743755813346, 126.9689736328982],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f97316", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.70546670479009, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_5b9fa68204209fbba95df6d77b11b173 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_627eca3a0d5b74cf36c0b8e926a4ee7d = $(`<div id="html_627eca3a0d5b74cf36c0b8e926a4ee7d" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#f97316;color:white;">지반 약화 · 주의</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">58.5 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">58.5 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">58.5 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.013101</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">25.1</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">15.9</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">17.5</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">타일 전체가 주변보다 밝게 반사되어 나지, 마른 토양, 콘크리트, 암반 노출 같은 표면 변화 가능성이 있습니다. 오차가 타일 전반에 퍼져 있어 넓은 면적의 표면 차이 가능성이 있습니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.947438<br>경도 126.968974       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_5b9fa68204209fbba95df6d77b11b173.setContent(html_627eca3a0d5b74cf36c0b8e926a4ee7d);
+            
+        
+
+        circle_marker_36c79cc52cb4d3d03f284aa86b1408bb.bindPopup(popup_5b9fa68204209fbba95df6d77b11b173)
+        ;
+
+        
+    
+    
+            var circle_marker_49e82d80032d0010f710a885b61c6975 = L.circleMarker(
+                [35.7827624002039, 127.09956783823512],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f97316", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.467793592507505, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_d7dd372aa36832430bf57303191232ac = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_b9e9dbaecad6c14d14ac4990a807a38a = $(`<div id="html_b9e9dbaecad6c14d14ac4990a807a38a" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#f97316;color:white;">지반 약화 · 주의</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">57.3 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 InSAR 변위 래스터를 격자로 샘플링한 후보입니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">57.3 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">57.3 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.020540</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">18.0</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">광학영상만으로는 산림·그늘·식생 때문에 표면 이상이 약하게 보일 수 있어, 위성 레이더 변위값을 직접 반영했습니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.782762<br>경도 127.099568       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_d7dd372aa36832430bf57303191232ac.setContent(html_b9e9dbaecad6c14d14ac4990a807a38a);
+            
+        
+
+        circle_marker_49e82d80032d0010f710a885b61c6975.bindPopup(popup_d7dd372aa36832430bf57303191232ac)
+        ;
+
+        
+    
+    
+            var circle_marker_1dc2bc44a42bd5c47ee072c40d1fe64d = L.circleMarker(
+                [35.912597095717416, 126.95568124912528],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f97316", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.456200564463703, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_1e8bb93a5cecfa381c33396620ebf0b8 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_d6cd9018740f9cd753c4754b50fc463f = $(`<div id="html_d6cd9018740f9cd753c4754b50fc463f" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#f97316;color:white;">지반 약화 · 주의</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">57.3 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">57.3 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">57.3 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.009066</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">28.3</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">16.9</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">12.1</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">타일 전체가 주변보다 밝게 반사되어 나지, 마른 토양, 콘크리트, 암반 노출 같은 표면 변화 가능성이 있습니다. 오차가 타일 중심부에 집중되어 국소적인 표면 변화 가능성이 큽니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.912597<br>경도 126.955681       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_1e8bb93a5cecfa381c33396620ebf0b8.setContent(html_d6cd9018740f9cd753c4754b50fc463f);
+            
+        
+
+        circle_marker_1dc2bc44a42bd5c47ee072c40d1fe64d.bindPopup(popup_1e8bb93a5cecfa381c33396620ebf0b8)
+        ;
+
+        
+    
+    
+            var circle_marker_bea7cb04a014f1f6883934415bdfd005 = L.circleMarker(
+                [35.94767682375561, 126.98315744581524],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f97316", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.32926617592945, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_2fe66ce9863c28a434bd57c861ac98df = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_8f112dc8dbdfbc5a28ed94ce10a3da48 = $(`<div id="html_8f112dc8dbdfbc5a28ed94ce10a3da48" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#f97316;color:white;">지반 약화 · 주의</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">56.6 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">56.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">56.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.011789</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">25.3</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">15.6</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">15.7</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">타일 전체가 주변보다 밝게 반사되어 나지, 마른 토양, 콘크리트, 암반 노출 같은 표면 변화 가능성이 있습니다. 오차가 타일 중심부에 집중되어 국소적인 표면 변화 가능성이 큽니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.947677<br>경도 126.983157       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_2fe66ce9863c28a434bd57c861ac98df.setContent(html_8f112dc8dbdfbc5a28ed94ce10a3da48);
+            
+        
+
+        circle_marker_bea7cb04a014f1f6883934415bdfd005.bindPopup(popup_2fe66ce9863c28a434bd57c861ac98df)
+        ;
+
+        
+    
+    
+            var circle_marker_c2b47d42b7d6523806288c0a824f2df1 = L.circleMarker(
+                [35.906950989173524, 126.96291784760622],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f97316", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.082065673102, "stroke": true, "weight": 2}
+            ).addTo(feature_group_dbf06823c5ab625702ed6f22031ab775);
+        
+    
+        var popup_b82dd73f001567f42fe0926af9f605b5 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_b7034a122d78750cca116a803f6ab703 = $(`<div id="html_b7034a122d78750cca116a803f6ab703" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#f97316;color:white;">지반 약화 · 주의</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">55.4 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">광학영상 이상 점수가 높음, 밝기·경계·복원오차 기반 표면 변화 신호가 큼</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">지반 약화</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">55.4 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">55.4 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 변위 절댓값</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.009166</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">광학 영상 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">26.9</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">표면 지형 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">16.3</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">InSAR 기여</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">12.2</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">타일 전체가 주변보다 밝게 반사되어 나지, 마른 토양, 콘크리트, 암반 노출 같은 표면 변화 가능성이 있습니다. 오차가 타일 전반에 퍼져 있어 넓은 면적의 표면 차이 가능성이 있습니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.906951<br>경도 126.962918       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_b82dd73f001567f42fe0926af9f605b5.setContent(html_b7034a122d78750cca116a803f6ab703);
+            
+        
+
+        circle_marker_c2b47d42b7d6523806288c0a824f2df1.bindPopup(popup_b82dd73f001567f42fe0926af9f605b5)
+        ;
+
+        
+    
+    
+            feature_group_dbf06823c5ab625702ed6f22031ab775.addTo(map_39a2701eba405fdc9931247b1a83987f);
+        
+    
+            var feature_group_d6d82fbd0680fe210e9fad2936456687 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_19444171e23fe6675ff54bfcbd5e16c5 = L.circleMarker(
+                [35.85663965115517, 126.9595527648926],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 24.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_3be51078e5d5e51ca8cd02a83c9cb061 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_476ff326643a401e9decf536758ce095 = $(`<div id="html_476ff326643a401e9decf536758ce095" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.9 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 10.0m, 주변 평균 대비 8.1m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">10.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">8.1 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.856640<br>경도 126.959553       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_3be51078e5d5e51ca8cd02a83c9cb061.setContent(html_476ff326643a401e9decf536758ce095);
+            
+        
+
+        circle_marker_19444171e23fe6675ff54bfcbd5e16c5.bindPopup(popup_3be51078e5d5e51ca8cd02a83c9cb061)
+        ;
+
+        
+    
+    
+            var circle_marker_69e7fcc6da32bc6e53d1bb0c1e69274f = L.circleMarker(
+                [35.903373209688425, 127.12297439575195],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.955135996115764, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_9339afff52f2ccce085e4f3c288bc0fc = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_77ea6369bfb6c4a692f1150011254f90 = $(`<div id="html_77ea6369bfb6c4a692f1150011254f90" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.6 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 8.0m, 주변 평균 대비 6.3m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.6 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">8.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">6.3 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.903373<br>경도 127.122974       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_9339afff52f2ccce085e4f3c288bc0fc.setContent(html_77ea6369bfb6c4a692f1150011254f90);
+            
+        
+
+        circle_marker_69e7fcc6da32bc6e53d1bb0c1e69274f.bindPopup(popup_9339afff52f2ccce085e4f3c288bc0fc)
+        ;
+
+        
+    
+    
+            var circle_marker_7c3453607c02e4c5f0a6987cacb0b698 = L.circleMarker(
+                [35.76308985263032, 126.9595527648926],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.93443911773926, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_4e0a332421a676c9d7f2ad28090bee8a = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_72342b04b8bbf9f527fb18e7fbd57562 = $(`<div id="html_72342b04b8bbf9f527fb18e7fbd57562" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.5 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 5.0m, 주변 평균 대비 6.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.5 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.5 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">6.6 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.763090<br>경도 126.959553       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_4e0a332421a676c9d7f2ad28090bee8a.setContent(html_72342b04b8bbf9f527fb18e7fbd57562);
+            
+        
+
+        circle_marker_7c3453607c02e4c5f0a6987cacb0b698.bindPopup(popup_4e0a332421a676c9d7f2ad28090bee8a)
+        ;
+
+        
+    
+    
+            var circle_marker_dd9da2553919571c3bf8e20599b1f066 = L.circleMarker(
+                [35.8722205675616, 126.97877883911131],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.934066253164467, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_3b58f55197766a80f3e62ac5437d4e37 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_14301ba1204f87affa121c2172517465 = $(`<div id="html_14301ba1204f87affa121c2172517465" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.5 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 8.0m, 주변 평균 대비 9.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.5 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.5 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">8.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">9.2 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.872221<br>경도 126.978779       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_3b58f55197766a80f3e62ac5437d4e37.setContent(html_14301ba1204f87affa121c2172517465);
+            
+        
+
+        circle_marker_dd9da2553919571c3bf8e20599b1f066.bindPopup(popup_3b58f55197766a80f3e62ac5437d4e37)
+        ;
+
+        
+    
+    
+            var circle_marker_5bfabee6057c494e45fae827171fa655 = L.circleMarker(
+                [35.848848044356686, 127.00761795043948],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.902707984370714, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_174af8ae60ff42b5c4efc759a7629753 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_9bd16f7ec5bad3d0855121245b7158af = $(`<div id="html_9bd16f7ec5bad3d0855121245b7158af" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.3 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 8.0m, 주변 평균 대비 6.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.3 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.3 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">8.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">6.6 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.848848<br>경도 127.007618       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_174af8ae60ff42b5c4efc759a7629753.setContent(html_9bd16f7ec5bad3d0855121245b7158af);
+            
+        
+
+        circle_marker_5bfabee6057c494e45fae827171fa655.bindPopup(popup_174af8ae60ff42b5c4efc759a7629753)
+        ;
+
+        
+    
+    
+            var circle_marker_ff5db2f9ca7a07092b4771ef81ed73d6 = L.circleMarker(
+                [35.94229677415812, 127.03645706176756],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.882032637682677, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_7bf63cb42b0be96ceece55ed8925204f = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_ba28962e9eb6955a12cd8f7ceb8624e7 = $(`<div id="html_ba28962e9eb6955a12cd8f7ceb8624e7" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.2 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 10.0m, 주변 평균 대비 4.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.2 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.2 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">10.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">4.9 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.942297<br>경도 127.036457       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_7bf63cb42b0be96ceece55ed8925204f.setContent(html_ba28962e9eb6955a12cd8f7ceb8624e7);
+            
+        
+
+        circle_marker_ff5db2f9ca7a07092b4771ef81ed73d6.bindPopup(popup_7bf63cb42b0be96ceece55ed8925204f)
+        ;
+
+        
+    
+    
+            var circle_marker_8bf3b05e2e71ff19ec50c18b92009fd1 = L.circleMarker(
+                [35.93451359391221, 126.9595527648926],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.877691212769882, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_f1a80e8ec7427a6ab437d5c73848744e = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_0b43cd65425f52adcc898b258274f100 = $(`<div id="html_0b43cd65425f52adcc898b258274f100" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.2 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 10.0m, 주변 평균 대비 4.7m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.2 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.2 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">10.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">4.7 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.934514<br>경도 126.959553       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_f1a80e8ec7427a6ab437d5c73848744e.setContent(html_0b43cd65425f52adcc898b258274f100);
+            
+        
+
+        circle_marker_8bf3b05e2e71ff19ec50c18b92009fd1.bindPopup(popup_f1a80e8ec7427a6ab437d5c73848744e)
+        ;
+
+        
+    
+    
+            var circle_marker_6114b792ad3b97129fac2954fc7c991b = L.circleMarker(
+                [35.825468630406455, 126.96916580200195],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.877336095167948, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_5f2e9b58480539c7470741331721856a = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_a9c421b7bab9dfc2bd95421a4d63b192 = $(`<div id="html_a9c421b7bab9dfc2bd95421a4d63b192" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.2 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 11.0m, 주변 평균 대비 6.8m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.2 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.2 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">11.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">6.8 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.825469<br>경도 126.969166       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_5f2e9b58480539c7470741331721856a.setContent(html_a9c421b7bab9dfc2bd95421a4d63b192);
+            
+        
+
+        circle_marker_6114b792ad3b97129fac2954fc7c991b.bindPopup(popup_5f2e9b58480539c7470741331721856a)
+        ;
+
+        
+    
+    
+            var circle_marker_f8ceee51e71eb3fb4210e1214fc6c2fb = L.circleMarker(
+                [35.84105567191978, 126.9595527648926],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.868765080880717, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_896f3080128a420f47a69a0086a544ce = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_ee9a6bcc27df69642db5db19ad5697f0 = $(`<div id="html_ee9a6bcc27df69642db5db19ad5697f0" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.1 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 7.0m, 주변 평균 대비 5.4m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.1 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.1 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">7.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5.4 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.841056<br>경도 126.959553       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_896f3080128a420f47a69a0086a544ce.setContent(html_ee9a6bcc27df69642db5db19ad5697f0);
+            
+        
+
+        circle_marker_f8ceee51e71eb3fb4210e1214fc6c2fb.bindPopup(popup_896f3080128a420f47a69a0086a544ce)
+        ;
+
+        
+    
+    
+            var circle_marker_4a1d3b0652e7a681819c8087e375d8d1 = L.circleMarker(
+                [35.8722205675616, 127.06529617309567],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.86062132944967, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_445bb2ca9916d272f100134a0b70cb18 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_ff7513fa83256fbfcfedc79949a230e6 = $(`<div id="html_ff7513fa83256fbfcfedc79949a230e6" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.1 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 10.0m, 주변 평균 대비 6.0m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.1 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.1 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">10.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">6.0 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.872221<br>경도 127.065296       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_445bb2ca9916d272f100134a0b70cb18.setContent(html_ff7513fa83256fbfcfedc79949a230e6);
+            
+        
+
+        circle_marker_4a1d3b0652e7a681819c8087e375d8d1.bindPopup(popup_445bb2ca9916d272f100134a0b70cb18)
+        ;
+
+        
+    
+    
+            var circle_marker_600bc70de1fc4cca43930559adbf7891 = L.circleMarker(
+                [35.80987852716727, 126.9595527648926],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.858514182922924, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_0f624c276a4e57054e8bfcf305ecbb86 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_9042459cd4a8c5c050c5ba0242955713 = $(`<div id="html_9042459cd4a8c5c050c5ba0242955713" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.1 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 8.0m, 주변 평균 대비 5.4m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.1 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.1 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">8.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5.4 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.809879<br>경도 126.959553       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_0f624c276a4e57054e8bfcf305ecbb86.setContent(html_9042459cd4a8c5c050c5ba0242955713);
+            
+        
+
+        circle_marker_600bc70de1fc4cca43930559adbf7891.bindPopup(popup_0f624c276a4e57054e8bfcf305ecbb86)
+        ;
+
+        
+    
+    
+            var circle_marker_00494d6937aa14344291f9d7b3f61853 = L.circleMarker(
+                [35.825468630406455, 126.9595527648926],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.84570150101681, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_055338a4c4656329663b18ffbc8d66c7 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_1ae889df26b9cc078bd6a77b93bc539b = $(`<div id="html_1ae889df26b9cc078bd6a77b93bc539b" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.0 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 10.0m, 주변 평균 대비 5.6m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">10.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5.6 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.825469<br>경도 126.959553       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_055338a4c4656329663b18ffbc8d66c7.setContent(html_1ae889df26b9cc078bd6a77b93bc539b);
+            
+        
+
+        circle_marker_00494d6937aa14344291f9d7b3f61853.bindPopup(popup_055338a4c4656329663b18ffbc8d66c7)
+        ;
+
+        
+    
+    
+            var circle_marker_14984a4d968da76e3e5a9a6767f5ad43 = L.circleMarker(
+                [35.918944934311824, 126.98839187622067],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.83787665832193, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_dac7b13954c06222ca309b50676d5af3 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_d6cfec8bdc920c4a8ee37b003aa2b70b = $(`<div id="html_d6cfec8bdc920c4a8ee37b003aa2b70b" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">78.0 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 4.0m, 주변 평균 대비 1.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">4.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">1.9 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.918945<br>경도 126.988392       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_dac7b13954c06222ca309b50676d5af3.setContent(html_d6cfec8bdc920c4a8ee37b003aa2b70b);
+            
+        
+
+        circle_marker_14984a4d968da76e3e5a9a6767f5ad43.bindPopup(popup_dac7b13954c06222ca309b50676d5af3)
+        ;
+
+        
+    
+    
+            var circle_marker_c20727c58e48d7bac0cce8110b713dad = L.circleMarker(
+                [35.88000987703203, 127.04607009887695],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.82875984614533, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_2718f7de55e1fd3f6568b36c07c10ddb = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_45d7a2b84b0d26d946e1334ebd84b51a = $(`<div id="html_45d7a2b84b0d26d946e1334ebd84b51a" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.9 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 7.0m, 주변 평균 대비 4.3m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">7.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">4.3 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.880010<br>경도 127.046070       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_2718f7de55e1fd3f6568b36c07c10ddb.setContent(html_45d7a2b84b0d26d946e1334ebd84b51a);
+            
+        
+
+        circle_marker_c20727c58e48d7bac0cce8110b713dad.bindPopup(popup_2718f7de55e1fd3f6568b36c07c10ddb)
+        ;
+
+        
+    
+    
+            var circle_marker_2111a2661d0292189c58c79dd5801a3d = L.circleMarker(
+                [35.80987852716727, 126.96916580200195],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.825347202053514, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_7eeea79f94d50022b5f94a4a8397cc75 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_1f89dcb7f52f407aa7806c3b8228b973 = $(`<div id="html_1f89dcb7f52f407aa7806c3b8228b973" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.9 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 12.0m, 주변 평균 대비 3.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">12.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">3.9 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.809879<br>경도 126.969166       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_7eeea79f94d50022b5f94a4a8397cc75.setContent(html_1f89dcb7f52f407aa7806c3b8228b973);
+            
+        
+
+        circle_marker_2111a2661d0292189c58c79dd5801a3d.bindPopup(popup_7eeea79f94d50022b5f94a4a8397cc75)
+        ;
+
+        
+    
+    
+            var circle_marker_273e5d503651e39d8b69c8f0306249c7 = L.circleMarker(
+                [35.895586198164004, 126.96916580200195],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.817304786134635, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_56ed14ae837e898ed43581de4f616079 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_2ec62b969ca5b8e393ac1c52416d09e2 = $(`<div id="html_2ec62b969ca5b8e393ac1c52416d09e2" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.9 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 7.0m, 주변 평균 대비 2.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">7.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">2.2 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.895586<br>경도 126.969166       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_56ed14ae837e898ed43581de4f616079.setContent(html_2ec62b969ca5b8e393ac1c52416d09e2);
+            
+        
+
+        circle_marker_273e5d503651e39d8b69c8f0306249c7.bindPopup(popup_56ed14ae837e898ed43581de4f616079)
+        ;
+
+        
+    
+    
+            var circle_marker_59674397b3b659cde64836cf2b0492e9 = L.circleMarker(
+                [35.92672964727403, 126.97877883911131],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.816197728252487, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_eca0d79b410dff8bbed8c793acba0dd8 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_43c2f9c6d0a6f3de25bd35d3724c6e27 = $(`<div id="html_43c2f9c6d0a6f3de25bd35d3724c6e27" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.9 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 6.0m, 주변 평균 대비 1.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.9 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">6.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">1.9 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.926730<br>경도 126.978779       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_eca0d79b410dff8bbed8c793acba0dd8.setContent(html_43c2f9c6d0a6f3de25bd35d3724c6e27);
+            
+        
+
+        circle_marker_59674397b3b659cde64836cf2b0492e9.bindPopup(popup_eca0d79b410dff8bbed8c793acba0dd8)
+        ;
+
+        
+    
+    
+            var circle_marker_f09adb39d5f861ce8af6deff63f0d90c = L.circleMarker(
+                [35.895586198164004, 126.97877883911131],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.81327152827453, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_7ed795c2d1eb43c238f3319029a23bc3 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_a31c02dce17cf048f9eb0078a1c05935 = $(`<div id="html_a31c02dce17cf048f9eb0078a1c05935" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.8 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 5.0m, 주변 평균 대비 1.5m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.8 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.8 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">1.5 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.895586<br>경도 126.978779       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_7ed795c2d1eb43c238f3319029a23bc3.setContent(html_a31c02dce17cf048f9eb0078a1c05935);
+            
+        
+
+        circle_marker_f09adb39d5f861ce8af6deff63f0d90c.bindPopup(popup_7ed795c2d1eb43c238f3319029a23bc3)
+        ;
+
+        
+    
+    
+            var circle_marker_38529ad309a3bc1e9c9376bbec97c5db = L.circleMarker(
+                [35.88779842058902, 127.00761795043948],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.80029956533351, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_70233f503e70d4532c9de776b9ae833c = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_b370fcd95d712ba26c94e379f8071c4e = $(`<div id="html_b370fcd95d712ba26c94e379f8071c4e" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.8 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 6.0m, 주변 평균 대비 1.5m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.8 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.8 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">6.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">1.5 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.887798<br>경도 127.007618       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_70233f503e70d4532c9de776b9ae833c.setContent(html_b370fcd95d712ba26c94e379f8071c4e);
+            
+        
+
+        circle_marker_38529ad309a3bc1e9c9376bbec97c5db.bindPopup(popup_70233f503e70d4532c9de776b9ae833c)
+        ;
+
+        
+    
+    
+            var circle_marker_1aed8eb6bed067d2a5c308e21b67e6ba = L.circleMarker(
+                [35.91115945509384, 127.0268440246582],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.79809055334427, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_e37cf0177fc41581d93b504ff701cf1b = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_c23af5c8bba3d108105a6d74d57a229b = $(`<div id="html_c23af5c8bba3d108105a6d74d57a229b" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.7 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 8.0m, 주변 평균 대비 0.2m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">8.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.2 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.911159<br>경도 127.026844       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_e37cf0177fc41581d93b504ff701cf1b.setContent(html_c23af5c8bba3d108105a6d74d57a229b);
+            
+        
+
+        circle_marker_1aed8eb6bed067d2a5c308e21b67e6ba.bindPopup(popup_e37cf0177fc41581d93b504ff701cf1b)
+        ;
+
+        
+    
+    
+            var circle_marker_9ba9a2d539c3caa664d5b04e9aa410ac = L.circleMarker(
+                [35.88779842058902, 127.06529617309567],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.797912428747075, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_82c40e246cfcf063222031586aed9ba7 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_e5b3aca27421515d22bae29ca2f58228 = $(`<div id="html_e5b3aca27421515d22bae29ca2f58228" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.7 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 8.0m, 주변 평균 대비 2.0m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">8.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">2.0 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.887798<br>경도 127.065296       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_82c40e246cfcf063222031586aed9ba7.setContent(html_e5b3aca27421515d22bae29ca2f58228);
+            
+        
+
+        circle_marker_9ba9a2d539c3caa664d5b04e9aa410ac.bindPopup(popup_82c40e246cfcf063222031586aed9ba7)
+        ;
+
+        
+    
+    
+            var circle_marker_481db70df50c7644e9e916422eb6c913 = L.circleMarker(
+                [35.895586198164004, 127.04607009887695],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.79253282062535, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_f0fc1fca97cd373cb996704ccaec1844 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_41d09b3992c2968916ab58b0584cce6e = $(`<div id="html_41d09b3992c2968916ab58b0584cce6e" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.7 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 5.0m, 주변 평균 대비 2.7m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">2.7 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.895586<br>경도 127.046070       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_f0fc1fca97cd373cb996704ccaec1844.setContent(html_41d09b3992c2968916ab58b0584cce6e);
+            
+        
+
+        circle_marker_481db70df50c7644e9e916422eb6c913.bindPopup(popup_f0fc1fca97cd373cb996704ccaec1844)
+        ;
+
+        
+    
+    
+            var circle_marker_74d2112a23bf4984de0d7c470f412dab = L.circleMarker(
+                [35.918944934311824, 126.99800491333008],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.79142685933264, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_c46b32b9010b6fc079b45a967429dcc1 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_c188cae9e54e9c4d049bcb8e3bdbeeee = $(`<div id="html_c188cae9e54e9c4d049bcb8e3bdbeeee" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.7 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 5.0m, 주변 평균 대비 0.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.9 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.918945<br>경도 126.998005       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_c46b32b9010b6fc079b45a967429dcc1.setContent(html_c188cae9e54e9c4d049bcb8e3bdbeeee);
+            
+        
+
+        circle_marker_74d2112a23bf4984de0d7c470f412dab.bindPopup(popup_c46b32b9010b6fc079b45a967429dcc1)
+        ;
+
+        
+    
+    
+            var circle_marker_8fdee1cd80c4ea660271cf21e10075dd = L.circleMarker(
+                [35.895586198164004, 126.98839187622067],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.788978742430928, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_8721c88a5f5369f6bad095cb6e6a5830 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_f36a4a3cc11465b3214bfdd802d2be43 = $(`<div id="html_f36a4a3cc11465b3214bfdd802d2be43" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.7 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 3.0m, 주변 평균 대비 3.8m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">3.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">3.8 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.895586<br>경도 126.988392       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_8721c88a5f5369f6bad095cb6e6a5830.setContent(html_f36a4a3cc11465b3214bfdd802d2be43);
+            
+        
+
+        circle_marker_8fdee1cd80c4ea660271cf21e10075dd.bindPopup(popup_8721c88a5f5369f6bad095cb6e6a5830)
+        ;
+
+        
+    
+    
+            var circle_marker_ab529c05f63e4983d0f8730feaa6fe05 = L.circleMarker(
+                [35.85663965115517, 127.01723098754884],
+                {"bubblingMouseEvents": true, "color": "#075985", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#075985", "fillOpacity": 0.62, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.78515224610531, "stroke": true, "weight": 2}
+            ).addTo(feature_group_d6d82fbd0680fe210e9fad2936456687);
+        
+    
+        var popup_a6bd8f3dbd14a90d2cec26dfb916343d = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_17774ed22b2cf5c7561752836bdaac3f = $(`<div id="html_17774ed22b2cf5c7561752836bdaac3f" style="width: 100.0%; height: 100.0%;">     <div style="width:380px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:700; margin-bottom:8px; border-bottom:1px solid #e5e7eb; padding-bottom:6px;">         통합 위험 후보 분석       </div>       <div style="margin-bottom:10px;">         <span style="display:inline-block; padding:4px 9px; border-radius:999px; font-weight:700; background:#075985;color:white;">저지대 침수 · 매우 높음</span>         <span style="font-size:12px; color:#6b7280; margin-left:6px;">77.7 / 100</span>       </div>       <div style="margin-bottom:8px;">         <div style="font-size:12px; color:#6b7280; font-weight:700;">판단 요약</div>         <div style="font-size:13px;">해당 지점 고도 7.0m, 주변 평균 대비 4.9m 낮음. 상대적으로 낮고 완만한 지형일수록 폭우 때 빗물이 모이거나 배수가 지연될 수 있습니다.</div>       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px; margin-top:4px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">구분</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">통합 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">지반 약화 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">0.0 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">침수 우려 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">고도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">7.0 m</td>     </tr>          <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">주변보다 낮은 정도</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">4.9 m</td>     </tr>            </table>       <div style="font-size:12px; color:#374151; margin:8px 0;">DEM 고도 분석에서 주변보다 낮고 완만한 지형으로 분류된 폭우 시 침수 우려 후보입니다.</div>       <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:7px; font-size:12px; color:#374151;">         <b>좌표</b><br>위도 35.856640<br>경도 127.017231       </div>       <div style="font-size:11px; color:#6b7280; margin-top:8px;">         이 표시는 우선 확인용 후보입니다. 실제 위험 확정에는 현장 조사, 배수 시설, 하천 수위, 지질 자료 확인이 필요합니다.       </div>     </div>     </div>`)[0];
+                popup_a6bd8f3dbd14a90d2cec26dfb916343d.setContent(html_17774ed22b2cf5c7561752836bdaac3f);
+            
+        
+
+        circle_marker_ab529c05f63e4983d0f8730feaa6fe05.bindPopup(popup_a6bd8f3dbd14a90d2cec26dfb916343d)
+        ;
+
+        
+    
+    
+            feature_group_d6d82fbd0680fe210e9fad2936456687.addTo(map_39a2701eba405fdc9931247b1a83987f);
+        
+    
+            var feature_group_7e5745cc39093032dc854c1d01403d43 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_d7c9908a6c2877f4841815e7ceae7e00 = L.circleMarker(
+                [35.9189, 126.9884],
+                {"bubblingMouseEvents": true, "color": "#111827", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9333ea", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 3}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+        var popup_f92d65696a07763ea0c81f042cefbc51 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_b04c3d81bbadece5463fcf5ae8e8db0b = $(`<div id="html_b04c3d81bbadece5463fcf5ae8e8db0b" style="width: 100.0%; height: 100.0%;">     <div style="width:390px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:800; margin-bottom:8px;">과거 침수 이력 검증</div>       <div style="display:inline-block; padding:4px 9px; border-radius:999px; background:#581c87; color:white; font-weight:800; margin-bottom:8px;">         매우 잘 겹침       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">과거 지점</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">월평 자연재해위험개선지구 전미동 일대</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">이력 시기</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">상습 침수 취약지구</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">피해 유형</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">호우 시 침수 우려</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">가장 가까운 우리 후보</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보와 거리</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">5 m</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">78.0 / 100</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 등급</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">매우 높음</td>     </tr>            </table>       <div style="background:#faf5ff; border:1px solid #e9d5ff; border-radius:6px; padding:8px; margin-top:8px; font-size:12px;">         전주시 자연재해위험개선지구 공개 보도 기반 추정 좌표<br>         기사·공개자료 기반 추정 좌표라 실제 시설물 위치와 약간 다를 수 있습니다.       </div>     </div>     </div>`)[0];
+                popup_f92d65696a07763ea0c81f042cefbc51.setContent(html_b04c3d81bbadece5463fcf5ae8e8db0b);
+            
+        
+
+        circle_marker_d7c9908a6c2877f4841815e7ceae7e00.bindPopup(popup_f92d65696a07763ea0c81f042cefbc51)
+        ;
+
+        
+    
+    
+            var marker_2a5a8600786279e623508513662d8251 = L.marker(
+                [35.9189, 126.9884],
+                {
+}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+            var div_icon_52ec42b3e9b29926bcb234e1a9092739 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:18px; color:white; text-shadow:0 0 3px #111827; font-weight:900;\"\u003e!\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_2a5a8600786279e623508513662d8251.setIcon(div_icon_52ec42b3e9b29926bcb234e1a9092739);
+            
+    
+            var circle_marker_63617e10a249e350a98a00ea951998b7 = L.circleMarker(
+                [35.8956, 127.0461],
+                {"bubblingMouseEvents": true, "color": "#111827", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9333ea", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 3}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+        var popup_022415eb5d03745d9a99de176810e9df = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_f242e9eef2b39ecb27d58507ebefb2ca = $(`<div id="html_f242e9eef2b39ecb27d58507ebefb2ca" style="width: 100.0%; height: 100.0%;">     <div style="width:390px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:800; margin-bottom:8px;">과거 침수 이력 검증</div>       <div style="display:inline-block; padding:4px 9px; border-radius:999px; background:#581c87; color:white; font-weight:800; margin-bottom:8px;">         매우 잘 겹침       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">과거 지점</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">월평 자연재해위험개선지구 송천동 일대</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">이력 시기</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">상습 침수 취약지구</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">피해 유형</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">호우 시 침수 우려</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">가장 가까운 우리 후보</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보와 거리</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">3 m</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">77.7 / 100</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 등급</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">매우 높음</td>     </tr>            </table>       <div style="background:#faf5ff; border:1px solid #e9d5ff; border-radius:6px; padding:8px; margin-top:8px; font-size:12px;">         전주시 자연재해위험개선지구 공개 보도 기반 추정 좌표<br>         기사·공개자료 기반 추정 좌표라 실제 시설물 위치와 약간 다를 수 있습니다.       </div>     </div>     </div>`)[0];
+                popup_022415eb5d03745d9a99de176810e9df.setContent(html_f242e9eef2b39ecb27d58507ebefb2ca);
+            
+        
+
+        circle_marker_63617e10a249e350a98a00ea951998b7.bindPopup(popup_022415eb5d03745d9a99de176810e9df)
+        ;
+
+        
+    
+    
+            var marker_097d8e408f2718775b96ed34f1100184 = L.marker(
+                [35.8956, 127.0461],
+                {
+}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+            var div_icon_c59649d6c71b2162b012d719941aa4e8 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:18px; color:white; text-shadow:0 0 3px #111827; font-weight:900;\"\u003e!\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_097d8e408f2718775b96ed34f1100184.setIcon(div_icon_c59649d6c71b2162b012d719941aa4e8);
+            
+    
+            var circle_marker_31ee9ce72bd32905cdb348e2c616e3ca = L.circleMarker(
+                [35.818, 127.096],
+                {"bubblingMouseEvents": true, "color": "#111827", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9333ea", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 3}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+        var popup_a2d593943aa191982548bb1c0568d239 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_6389eb363227a4102d7c64b1a901e090 = $(`<div id="html_6389eb363227a4102d7c64b1a901e090" style="width: 100.0%; height: 100.0%;">     <div style="width:390px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:800; margin-bottom:8px;">과거 침수 이력 검증</div>       <div style="display:inline-block; padding:4px 9px; border-radius:999px; background:#581c87; color:white; font-weight:800; margin-bottom:8px;">         근처 후보 있음       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">과거 지점</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">마전교 언더패스 일대</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">이력 시기</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">2023년 5월 호우</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">피해 유형</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">차량 침수·통제 보도 지점</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">가장 가까운 우리 후보</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수 후보</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보와 거리</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">700 m</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">72.6 / 100</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 등급</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">낮음</td>     </tr>            </table>       <div style="background:#faf5ff; border:1px solid #e9d5ff; border-radius:6px; padding:8px; margin-top:8px; font-size:12px;">         언론 보도 기반 추정 좌표<br>         기사·공개자료 기반 추정 좌표라 실제 시설물 위치와 약간 다를 수 있습니다.       </div>     </div>     </div>`)[0];
+                popup_a2d593943aa191982548bb1c0568d239.setContent(html_6389eb363227a4102d7c64b1a901e090);
+            
+        
+
+        circle_marker_31ee9ce72bd32905cdb348e2c616e3ca.bindPopup(popup_a2d593943aa191982548bb1c0568d239)
+        ;
+
+        
+    
+    
+            var marker_d617f1316c9eb41926227b148e5a10aa = L.marker(
+                [35.818, 127.096],
+                {
+}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+            var div_icon_f5945fe17cfa10602b900a4ac26bfa6e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:18px; color:white; text-shadow:0 0 3px #111827; font-weight:900;\"\u003e!\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_d617f1316c9eb41926227b148e5a10aa.setIcon(div_icon_f5945fe17cfa10602b900a4ac26bfa6e);
+            
+    
+            var circle_marker_49163e01db8c4ac5998a8daf221e1740 = L.circleMarker(
+                [35.829, 127.128],
+                {"bubblingMouseEvents": true, "color": "#111827", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9333ea", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 3}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+        var popup_672e3de96dcc23948533e12feef0812b = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_5152477a40c8ec25207e3e3d17399d4f = $(`<div id="html_5152477a40c8ec25207e3e3d17399d4f" style="width: 100.0%; height: 100.0%;">     <div style="width:390px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:800; margin-bottom:8px;">과거 침수 이력 검증</div>       <div style="display:inline-block; padding:4px 9px; border-radius:999px; background:#581c87; color:white; font-weight:800; margin-bottom:8px;">         간접 참고       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">과거 지점</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">진북터널 입구 일대</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">이력 시기</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">2023년 5월 호우</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">피해 유형</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">도로 장애·통제 보도 지점</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">가장 가까운 우리 후보</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수 후보</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보와 거리</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">1824 m</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">72.9 / 100</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 등급</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">낮음</td>     </tr>            </table>       <div style="background:#faf5ff; border:1px solid #e9d5ff; border-radius:6px; padding:8px; margin-top:8px; font-size:12px;">         언론 보도 기반 추정 좌표<br>         기사·공개자료 기반 추정 좌표라 실제 시설물 위치와 약간 다를 수 있습니다.       </div>     </div>     </div>`)[0];
+                popup_672e3de96dcc23948533e12feef0812b.setContent(html_5152477a40c8ec25207e3e3d17399d4f);
+            
+        
+
+        circle_marker_49163e01db8c4ac5998a8daf221e1740.bindPopup(popup_672e3de96dcc23948533e12feef0812b)
+        ;
+
+        
+    
+    
+            var marker_2e6ee86c9035e4b197f05893d6db1170 = L.marker(
+                [35.829, 127.128],
+                {
+}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+            var div_icon_7e28283064353b871a04d416746e6fd3 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:18px; color:white; text-shadow:0 0 3px #111827; font-weight:900;\"\u003e!\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_2e6ee86c9035e4b197f05893d6db1170.setIcon(div_icon_7e28283064353b871a04d416746e6fd3);
+            
+    
+            var circle_marker_8f17372c06a552587068b02ea2a287a2 = L.circleMarker(
+                [35.81, 127.1],
+                {"bubblingMouseEvents": true, "color": "#111827", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#9333ea", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 3}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+        var popup_f6810df20a214d45f70568e0b1ea1f88 = L.popup({
+  "maxWidth": 430,
+});
+
+        
+            
+                var html_1997d17d089b82a79ba86c8bbc35f624 = $(`<div id="html_1997d17d089b82a79ba86c8bbc35f624" style="width: 100.0%; height: 100.0%;">     <div style="width:390px; font-family:'Malgun Gothic',Arial,sans-serif; color:#111827; line-height:1.45;">       <div style="font-size:16px; font-weight:800; margin-bottom:8px;">과거 침수 이력 검증</div>       <div style="display:inline-block; padding:4px 9px; border-radius:999px; background:#581c87; color:white; font-weight:800; margin-bottom:8px;">         근처 후보 있음       </div>       <table style="width:100%; border-collapse:collapse; font-size:12px;">              <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">과거 지점</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">삼천 둔치·하상도로 일대</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">이력 시기</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">2023년 7월 호우</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">피해 유형</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">하천 수위 상승·도로 통제 지점</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">가장 가까운 우리 후보</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">저지대 침수 후보</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보와 거리</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">918 m</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 점수</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">72.6 / 100</td>     </tr>                   <tr>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb;">후보 등급</td>       <td style="padding:4px 5px; border-bottom:1px solid #e5e7eb; text-align:right;">낮음</td>     </tr>            </table>       <div style="background:#faf5ff; border:1px solid #e9d5ff; border-radius:6px; padding:8px; margin-top:8px; font-size:12px;">         언론 보도 기반 추정 좌표<br>         기사·공개자료 기반 추정 좌표라 실제 시설물 위치와 약간 다를 수 있습니다.       </div>     </div>     </div>`)[0];
+                popup_f6810df20a214d45f70568e0b1ea1f88.setContent(html_1997d17d089b82a79ba86c8bbc35f624);
+            
+        
+
+        circle_marker_8f17372c06a552587068b02ea2a287a2.bindPopup(popup_f6810df20a214d45f70568e0b1ea1f88)
+        ;
+
+        
+    
+    
+            var marker_c92bcffd1ceedc7901d38c0544b9df68 = L.marker(
+                [35.81, 127.1],
+                {
+}
+            ).addTo(feature_group_7e5745cc39093032dc854c1d01403d43);
+        
+    
+            var div_icon_3f12cc0796b2a120d2a1ad42d1ade930 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:18px; color:white; text-shadow:0 0 3px #111827; font-weight:900;\"\u003e!\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_c92bcffd1ceedc7901d38c0544b9df68.setIcon(div_icon_3f12cc0796b2a120d2a1ad42d1ade930);
+            
+    
+            feature_group_7e5745cc39093032dc854c1d01403d43.addTo(map_39a2701eba405fdc9931247b1a83987f);
+        
+    
+            var layer_control_19d65d972ab715ed972a518481428bb4_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_ed88416207b99b254487329715c3d4f3,
+                },
+                overlays :  {
+                    "\uc9c0\ubc18 \uc57d\ud654" : feature_group_dbf06823c5ab625702ed6f22031ab775,
+                    "\uc800\uc9c0\ub300 \uce68\uc218" : feature_group_d6d82fbd0680fe210e9fad2936456687,
+                    "\uacfc\uac70 \uce68\uc218 \uc774\ub825 \uac80\uc99d" : feature_group_7e5745cc39093032dc854c1d01403d43,
+                },
+            };
+            let layer_control_19d65d972ab715ed972a518481428bb4 = L.control.layers(
+                layer_control_19d65d972ab715ed972a518481428bb4_layers.base_layers,
+                layer_control_19d65d972ab715ed972a518481428bb4_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_39a2701eba405fdc9931247b1a83987f);
+
+        
+    
+            map_39a2701eba405fdc9931247b1a83987f.fitBounds(
+                [[35.750943705981896, 127.1401365288936], [35.94755740028494, 126.97606551845593], [35.78212641964949, 127.05975603707871], [35.93037678690171, 126.98359709307675], [35.94743755813346, 126.9689736328982], [35.7827624002039, 127.09956783823512], [35.912597095717416, 126.95568124912528], [35.94767682375561, 126.98315744581524], [35.906950989173524, 126.96291784760622], [35.85663965115517, 126.9595527648926], [35.903373209688425, 127.12297439575195], [35.76308985263032, 126.9595527648926], [35.8722205675616, 126.97877883911131], [35.848848044356686, 127.00761795043948], [35.94229677415812, 127.03645706176756], [35.93451359391221, 126.9595527648926], [35.825468630406455, 126.96916580200195], [35.84105567191978, 126.9595527648926], [35.8722205675616, 127.06529617309567], [35.80987852716727, 126.9595527648926], [35.825468630406455, 126.9595527648926], [35.918944934311824, 126.98839187622067], [35.88000987703203, 127.04607009887695], [35.80987852716727, 126.96916580200195], [35.895586198164004, 126.96916580200195], [35.92672964727403, 126.97877883911131], [35.895586198164004, 126.97877883911131], [35.88779842058902, 127.00761795043948], [35.91115945509384, 127.0268440246582], [35.88779842058902, 127.06529617309567], [35.895586198164004, 127.04607009887695], [35.918944934311824, 126.99800491333008], [35.895586198164004, 126.98839187622067], [35.85663965115517, 127.01723098754884], [35.9189, 126.9884], [35.8956, 127.0461], [35.818, 127.096], [35.829, 127.128], [35.81, 127.1]],
+                {}
+            );
+        
+</script>
+</html>

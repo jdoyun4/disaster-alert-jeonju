@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-06-11T16:54:08.351146+00:00",
+  "forecast_center": {
+    "latitude": 35.87501289524417,
+    "longitude": 127.00069656372071
+  },
+  "alert_counts": {
+    "정상": 25
+  },
+  "warning_count": 0,
+  "emergency_count": 0,
+  "alert_csv": "outputs\\rainfall_alerts.csv",
+  "alert_html": "outputs\\rainfall_alert.html"
+}

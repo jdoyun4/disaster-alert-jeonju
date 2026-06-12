@@ -1,0 +1,2 @@
+﻿source,crs,valid_pixel_count,mean_displacement,median_displacement,min_displacement,max_displacement,std_displacement,hotspot_threshold,hotspot_count,max_hotspots_saved
+data\insar\S1AA_20240506T093203_20240518T093202_VVP012_INT80_G_weF_DBCC_vert_disp.tif,EPSG:32652,1793223,0.009021367877721786,0.005047227721661329,-0.08300939202308655,0.11643120646476746,0.017788365483283997,0.05900608003139496,0,500
