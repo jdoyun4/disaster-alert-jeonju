@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-12T13:51:51.932006+00:00",
+  "generated_at_utc": "2026-06-12T19:36:38.257659+00:00",
   "analysis_scope": {
     "name": "전주시",
     "boundary_source": "OpenStreetMap relation 7619919",
@@ -12,8 +12,8 @@
     "interpretation": "동일 영상 내부의 상대적 이상 후보이며 확정 확률이 아님"
   },
   "insar": {
-    "job_status": null,
-    "hotspot_count": 0,
+    "job_status": "SUCCEEDED",
+    "hotspot_count": 347,
     "interpretation": "위성 시선방향 변위 후보. 대기·식생·결맞음 품질 검증 필요"
   },
   "flood": {
@@ -23,7 +23,7 @@
   "rainfall": {
     "source": "Open-Meteo",
     "forecast_grid_count": 22,
-    "forecast_failure_count": 0
+    "forecast_failure_count": 1
   },
   "known_limits": [
     "광학 이상도는 학습 영상 내부 상대값",

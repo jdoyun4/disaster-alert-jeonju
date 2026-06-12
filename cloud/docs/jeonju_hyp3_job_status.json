@@ -1,8 +1,24 @@
 {
+  "browse_images": [
+    "https://d3gm2hf49xd6jj.cloudfront.net/4493f6d1-e4ac-4450-abd7-5e5c6ee936fb/S1AA_20260426T093143_20260520T093142_VVP024_INT80_G_weF_FE23_color_phase.png",
+    "https://d3gm2hf49xd6jj.cloudfront.net/4493f6d1-e4ac-4450-abd7-5e5c6ee936fb/S1AA_20260426T093143_20260520T093142_VVP024_INT80_G_weF_FE23_unw_phase.png"
+  ],
   "bucket": "hyp3-edc-prod-contentbucket-1fv14ed36ifj6",
   "bucket_prefix": "4493f6d1-e4ac-4450-abd7-5e5c6ee936fb",
   "credit_cost": 10,
   "execution_started": true,
+  "expiration_time": "2026-06-27T00:00:00+00:00",
+  "files": [
+    {
+      "s3": {
+        "bucket": "hyp3-edc-prod-contentbucket-1fv14ed36ifj6",
+        "key": "4493f6d1-e4ac-4450-abd7-5e5c6ee936fb/S1AA_20260426T093143_20260520T093142_VVP024_INT80_G_weF_FE23.zip"
+      },
+      "filename": "S1AA_20260426T093143_20260520T093142_VVP024_INT80_G_weF_FE23.zip",
+      "size": 99574386,
+      "url": "https://d3gm2hf49xd6jj.cloudfront.net/4493f6d1-e4ac-4450-abd7-5e5c6ee936fb/S1AA_20260426T093143_20260520T093142_VVP024_INT80_G_weF_FE23.zip"
+    }
+  ],
   "job_id": "4493f6d1-e4ac-4450-abd7-5e5c6ee936fb",
   "job_parameters": {
     "looks": "20x4",
@@ -20,9 +36,17 @@
     "include_dem": false
   },
   "job_type": "INSAR_GAMMA",
+  "logs": [],
   "name": "jeonju-insar-20260426-20260520",
   "priority": 8000,
+  "processing_times": [
+    936.642
+  ],
   "request_time": "2026-06-12T11:17:01+00:00",
-  "status_code": "PENDING",
+  "status_code": "SUCCEEDED",
+  "thumbnail_images": [
+    "https://d3gm2hf49xd6jj.cloudfront.net/4493f6d1-e4ac-4450-abd7-5e5c6ee936fb/S1AA_20260426T093143_20260520T093142_VVP024_INT80_G_weF_FE23_color_phase_thumb.png",
+    "https://d3gm2hf49xd6jj.cloudfront.net/4493f6d1-e4ac-4450-abd7-5e5c6ee936fb/S1AA_20260426T093143_20260520T093142_VVP024_INT80_G_weF_FE23_unw_phase_thumb.png"
+  ],
   "user_id": "jdoyun04"
 }
