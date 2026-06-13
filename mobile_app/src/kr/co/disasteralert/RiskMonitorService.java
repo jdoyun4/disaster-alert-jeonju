@@ -28,6 +28,8 @@ import java.nio.charset.StandardCharsets;
 
 public class RiskMonitorService extends Service implements LocationListener {
     private static final String TAG = "RiskMonitor";
+    private static final String ACTION_TEST_ALERT =
+            "kr.co.disasteralert.action.TEST_ENTRY_ALERT";
     private static final int FOREGROUND_ID = 2607;
     private static final int ENTRY_ALERT_ID = 2608;
     private static final double ENTER_RADIUS_M = 500.0;
@@ -46,6 +48,12 @@ public class RiskMonitorService extends Service implements LocationListener {
         context.startForegroundService(intent);
     }
 
+    public static void notifyTest(Context context) {
+        Intent intent = new Intent(context, RiskMonitorService.class);
+        intent.setAction(ACTION_TEST_ALERT);
+        context.startForegroundService(intent);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -58,6 +66,9 @@ public class RiskMonitorService extends Service implements LocationListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         registerLocationUpdates();
+        if (intent != null && ACTION_TEST_ALERT.equals(intent.getAction())) {
+            showEntryAlert(new RiskPoint("지반 약화", "높음", 75, 120));
+        }
         return START_STICKY;
     }
 

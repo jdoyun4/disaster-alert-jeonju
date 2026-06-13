@@ -11,7 +11,7 @@ RAINFALL_PATH = OUTPUT_DIR / "rainfall_alerts.csv"
 HISTORICAL_PATH = OUTPUT_DIR / "historical_flood_validation.csv"
 SENTINEL_STATUS_PATH = OUTPUT_DIR / "sentinel2_server_update_status.json"
 
-ALERT_RADIUS_M = 900
+ALERT_RADIUS_M = 500
 WARNING_RADIUS_M = 1500
 
 

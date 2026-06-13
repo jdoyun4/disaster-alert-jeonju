@@ -12,7 +12,7 @@ INSAR_DIR = Path("data/insar")
 
 def read_json(name: str) -> dict:
     try:
-        return json.loads((OUTPUT_DIR / name).read_text(encoding="utf-8"))
+        return json.loads((OUTPUT_DIR / name).read_text(encoding="utf-8-sig"))
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
 
@@ -39,6 +39,15 @@ def insar_acquisition() -> dict:
     }
 
 
+def insar_status_matches_raster(status: dict, acquisition: dict) -> bool:
+    source_file = acquisition.get("source_file", "")
+    files = status.get("files", [])
+    return bool(source_file) and any(
+        str(item.get("filename", "")).replace(".zip", "") in source_file
+        for item in files
+    )
+
+
 def main() -> None:
     optical = read_json("sentinel2_server_update_status.json")
     rainfall = read_json("rainfall_alert_status.json")
@@ -59,6 +68,7 @@ def main() -> None:
         },
         "insar": {
             "job_status": insar.get("status_code", insar.get("status")),
+            "status_matches_raster": insar_status_matches_raster(insar, acquisition),
             "hotspot_count": row_count("insar_hotspots.csv"),
             **acquisition,
             "interpretation": "위성 시선방향 변위 후보. 대기·식생·결맞음 품질 검증 필요",

@@ -12,22 +12,6 @@ OUTPUT_PATH = OUTPUT_DIR / "historical_flood_validation.csv"
 
 HISTORICAL_POINTS = [
     {
-        "name": "월평 자연재해위험개선지구 전미동 일대",
-        "latitude": 35.9189,
-        "longitude": 126.9884,
-        "event_period": "상습 침수 취약지구",
-        "damage_type": "호우 시 침수 우려",
-        "source_note": "전주시 자연재해위험개선지구 공개 보도 기반 추정 좌표",
-    },
-    {
-        "name": "월평 자연재해위험개선지구 송천동 일대",
-        "latitude": 35.8956,
-        "longitude": 127.0461,
-        "event_period": "상습 침수 취약지구",
-        "damage_type": "호우 시 침수 우려",
-        "source_note": "전주시 자연재해위험개선지구 공개 보도 기반 추정 좌표",
-    },
-    {
         "name": "마전교 언더패스 일대",
         "latitude": 35.8180,
         "longitude": 127.0960,

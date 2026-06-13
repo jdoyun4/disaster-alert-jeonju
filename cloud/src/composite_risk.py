@@ -221,8 +221,11 @@ def build_insar_grid_points() -> pd.DataFrame:
         grid["optical_component"] = 0.0
         grid["surface_component"] = 0.0
         grid["insar_component"] = 25 * grid["insar_norm"]
+        grid["insar_baseline_component"] = 25 + 20 * grid["insar_norm"]
         grid["fusion_bonus"] = 0.0
-        grid["composite_risk_score"] = (25 + 45 * grid["insar_norm"]).clip(0, 80)
+        grid["composite_risk_score"] = (
+            grid["insar_component"] + grid["insar_baseline_component"]
+        ).clip(0, 80)
         grid["composite_risk_level"] = grid["composite_risk_score"].apply(risk_level)
         grid["composite_reason"] = (
             "광학영상 이상 후보가 적은 산지/비도심 구간을 보완하기 위해 "
@@ -326,6 +329,7 @@ def main() -> None:
         combined["optical_component"] = combined["optical_norm"] * 35
         combined["surface_component"] = combined["surface_norm"] * 20
         combined["insar_component"] = combined["insar_norm"] * 25
+        combined["insar_baseline_component"] = 0.0
         combined["fusion_bonus"] = np.where(
             combined["insar_matched"],
             20 * np.minimum(combined["optical_norm"], combined["insar_norm"]),
@@ -358,6 +362,7 @@ def main() -> None:
         "optical_component",
         "surface_component",
         "insar_component",
+        "insar_baseline_component",
         "fusion_bonus",
         "mean_brightness",
         "brightness_std",

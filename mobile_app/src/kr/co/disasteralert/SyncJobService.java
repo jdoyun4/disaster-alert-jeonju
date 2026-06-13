@@ -31,7 +31,7 @@ public class SyncJobService extends JobService {
     private static final String TAG = "DisasterAlertSync";
     private static final int JOB_ID = 260612;
     private static final int NOTIFICATION_ID = 2606;
-    private static final double ALERT_RADIUS_M = 900.0;
+    private static final double ALERT_RADIUS_M = 500.0;
     private static final double RAIN_RADIUS_M = 1500.0;
     private static final long REPEAT_INTERVAL_MS = 3 * 60 * 60 * 1000L;
 

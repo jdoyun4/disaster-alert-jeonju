@@ -1,0 +1,12 @@
+{
+  "status": "ok",
+  "error_count": 0,
+  "errors": [],
+  "counts": {
+    "integrated": 29,
+    "lowland": 220,
+    "composite": 37,
+    "rainfall": 25,
+    "insar_hotspots": 347
+  }
+}

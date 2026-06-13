@@ -90,13 +90,25 @@ def publish() -> None:
         "integrated_ground_flood_risk.csv",
         "historical_flood_validation.csv",
         "insar_displacement_summary.csv",
-        "jeonju_hyp3_job_status.json",
         "data_quality.json",
+        "data_integrity.json",
     ]
     for name in names:
         source = OUTPUT_DIR / name
         if source.exists():
             shutil.copy2(source, DOCS_DIR / name)
+
+    status_path = OUTPUT_DIR / "jeonju_hyp3_job_status.json"
+    raster_paths = list((ROOT / "data" / "insar").glob("*disp*.tif"))
+    if status_path.exists() and raster_paths:
+        status = json.loads(status_path.read_text(encoding="utf-8-sig"))
+        source_name = max(raster_paths, key=lambda path: path.stat().st_mtime).name
+        matches = any(
+            str(item.get("filename", "")).replace(".zip", "") in source_name
+            for item in status.get("files", [])
+        )
+        if matches:
+            shutil.copy2(status_path, DOCS_DIR / status_path.name)
 
     risk_points = []
     risk_path = OUTPUT_DIR / "integrated_ground_flood_risk.csv"
@@ -157,6 +169,7 @@ def main() -> None:
     python("src/rainfall_alert.py")
     python("src/historical_flood_validation.py")
     python("src/data_quality.py")
+    python("src/data_integrity.py")
     python("src/visualize.py")
     python("src/unified_app.py")
     publish()

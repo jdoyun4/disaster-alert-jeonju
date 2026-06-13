@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
                 })
                 .setNegativeButton("취소", null)
                 .setNeutralButton("경보 시험", (dialog, which) ->
-                        SyncJobService.notifyTest(this)
+                        RiskMonitorService.notifyTest(this)
                 )
                 .show();
     }
