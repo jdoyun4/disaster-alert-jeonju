@@ -201,7 +201,7 @@ public class RiskMonitorService extends Service implements LocationListener {
         String message = Math.round(point.distanceM) + "m 근처에 "
                 + point.type + " 후보가 있습니다. 등급 " + point.level
                 + ", 점수 " + Math.round(point.score) + "점입니다.";
-        Notification notification = notificationBuilder("disaster_alerts")
+        Notification notification = notificationBuilder("risk_entry_alerts")
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(new Notification.BigTextStyle().bigText(message))

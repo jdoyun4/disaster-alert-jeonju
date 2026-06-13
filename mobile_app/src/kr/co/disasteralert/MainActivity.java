@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.media.AudioAttributes;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -242,6 +244,23 @@ public class MainActivity extends Activity {
             );
             channel.setDescription("강우량과 위치 기반 위험 경고");
             getSystemService(NotificationManager.class).createNotificationChannel(channel);
+
+            NotificationChannel entryChannel = new NotificationChannel(
+                    "risk_entry_alerts",
+                    "위험지역 진입 경보",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            entryChannel.setDescription("위험지역 진입 시 소리와 진동으로 경고합니다.");
+            entryChannel.enableVibration(true);
+            entryChannel.setVibrationPattern(new long[]{0, 700, 250, 700, 250, 1000});
+            entryChannel.setSound(
+                    RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM),
+                    new AudioAttributes.Builder()
+                            .setUsage(AudioAttributes.USAGE_ALARM)
+                            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                            .build()
+            );
+            getSystemService(NotificationManager.class).createNotificationChannel(entryChannel);
 
             NotificationChannel monitorChannel = new NotificationChannel(
                     "location_monitor",

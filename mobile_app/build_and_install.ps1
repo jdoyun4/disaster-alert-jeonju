@@ -47,8 +47,8 @@ if ($LASTEXITCODE -ne 0) { throw "Resource compilation failed." }
     -I $androidJar `
     --min-sdk-version 26 `
     --target-sdk-version 36 `
-    --version-code 6 `
-    --version-name "2.2.0" `
+    --version-code 7 `
+    --version-name "2.2.1" `
     --manifest $stageManifest `
     --java $generated `
     -A $assets `
