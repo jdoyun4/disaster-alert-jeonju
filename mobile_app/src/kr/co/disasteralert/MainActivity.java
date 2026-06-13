@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
     private static final int PERMISSION_REQUEST = 100;
+    private static final int BACKGROUND_LOCATION_REQUEST = 101;
     private WebView webView;
     private TextView syncStatus;
     private boolean loadingRemote;
@@ -36,6 +37,10 @@ public class MainActivity extends Activity {
         createNotificationChannel();
         requestAppPermissions();
         SyncJobService.schedule(this);
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            RiskMonitorService.start(this);
+        }
         buildScreen();
         loadLatest();
     }
@@ -202,6 +207,32 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode,
+            String[] permissions,
+            int[] grantResults
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST
+                && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            RiskMonitorService.start(this);
+            if (Build.VERSION.SDK_INT >= 29
+                    && checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                        new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION},
+                        BACKGROUND_LOCATION_REQUEST
+                );
+            }
+        } else if (requestCode == BACKGROUND_LOCATION_REQUEST
+                && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            RiskMonitorService.start(this);
+        }
+    }
+
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= 26) {
             NotificationChannel channel = new NotificationChannel(
@@ -211,6 +242,14 @@ public class MainActivity extends Activity {
             );
             channel.setDescription("강우량과 위치 기반 위험 경고");
             getSystemService(NotificationManager.class).createNotificationChannel(channel);
+
+            NotificationChannel monitorChannel = new NotificationChannel(
+                    "location_monitor",
+                    "위험지역 위치 감시",
+                    NotificationManager.IMPORTANCE_LOW
+            );
+            monitorChannel.setDescription("백그라운드에서 위험지역 진입을 확인합니다.");
+            getSystemService(NotificationManager.class).createNotificationChannel(monitorChannel);
         }
     }
 
