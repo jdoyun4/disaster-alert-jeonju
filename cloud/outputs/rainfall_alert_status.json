@@ -1,11 +1,12 @@
 {
-  "checked_at_utc": "2026-06-13T08:38:09.666604+00:00",
+  "checked_at_utc": "2026-06-13T09:24:21.133482+00:00",
   "forecast_source": "Open-Meteo",
-  "forecast_grid_count": 21,
-  "forecast_failure_count": 1,
+  "forecast_grid_count": 22,
+  "forecast_failure_count": 0,
   "alert_counts": {
     "정상": 25
   },
   "warning_count": 0,
-  "emergency_count": 0
+  "emergency_count": 0,
+  "unknown_count": 0
 }

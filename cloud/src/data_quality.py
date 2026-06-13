@@ -1,11 +1,13 @@
 from datetime import datetime, timezone
 from pathlib import Path
 import json
+import re
 
 import pandas as pd
 
 
 OUTPUT_DIR = Path("outputs")
+INSAR_DIR = Path("data/insar")
 
 
 def read_json(name: str) -> dict:
@@ -22,10 +24,26 @@ def row_count(name: str) -> int:
         return 0
 
 
+def insar_acquisition() -> dict:
+    candidates = sorted(
+        INSAR_DIR.glob("*disp*.tif"), key=lambda path: path.stat().st_mtime, reverse=True
+    )
+    if not candidates:
+        return {}
+    source = candidates[0]
+    dates = re.findall(r"20\d{6}", source.name)
+    return {
+        "source_file": source.name,
+        "acquisition_start": dates[0] if len(dates) >= 1 else None,
+        "acquisition_end": dates[1] if len(dates) >= 2 else None,
+    }
+
+
 def main() -> None:
     optical = read_json("sentinel2_server_update_status.json")
     rainfall = read_json("rainfall_alert_status.json")
     insar = read_json("jeonju_hyp3_job_status.json")
+    acquisition = insar_acquisition()
     payload = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "analysis_scope": {
@@ -42,6 +60,7 @@ def main() -> None:
         "insar": {
             "job_status": insar.get("status_code", insar.get("status")),
             "hotspot_count": row_count("insar_hotspots.csv"),
+            **acquisition,
             "interpretation": "위성 시선방향 변위 후보. 대기·식생·결맞음 품질 검증 필요",
         },
         "flood": {
