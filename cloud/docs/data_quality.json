@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-12T19:36:38.257659+00:00",
+  "generated_at_utc": "2026-06-13T08:38:10.316049+00:00",
   "analysis_scope": {
     "name": "전주시",
     "boundary_source": "OpenStreetMap relation 7619919",
@@ -22,7 +22,7 @@
   },
   "rainfall": {
     "source": "Open-Meteo",
-    "forecast_grid_count": 22,
+    "forecast_grid_count": 21,
     "forecast_failure_count": 1
   },
   "known_limits": [
