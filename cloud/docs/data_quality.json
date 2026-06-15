@@ -1,13 +1,13 @@
 {
-  "generated_at_utc": "2026-06-14T21:58:26.075085+00:00",
+  "generated_at_utc": "2026-06-15T17:38:36.432098+00:00",
   "analysis_scope": {
     "name": "전주시",
     "boundary_source": "OpenStreetMap relation 7619919",
     "boundary_filter_enabled": true
   },
   "optical": {
-    "scene_datetime": "2026-06-10T02:27:39.010000Z",
-    "cloud_cover_percent": 34.724301,
+    "scene_datetime": "2026-06-15T02:27:41.088000Z",
+    "cloud_cover_percent": 5.443824,
     "candidate_count": 172,
     "interpretation": "동일 영상 내부의 상대적 이상 후보이며 확정 확률이 아님"
   },
