@@ -1,8 +1,8 @@
 {
-  "status": "updated",
+  "status": "no_new_data",
   "id": "S2C_52SCE_20260615_0_L2A",
   "datetime": "2026-06-15T02:27:41.088000Z",
   "cloud_cover": 5.443824,
-  "checked_at_utc": "2026-06-15T17:36:48.597594+00:00",
+  "checked_at_utc": "2026-06-16T00:17:32.215206+00:00",
   "metadata_path": "data/raw/sentinel2_active_sample_metadata.json"
 }
